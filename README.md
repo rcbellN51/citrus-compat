@@ -1,5 +1,7 @@
 # citrus-compat
 
+Experimental: Developed and tested on MINIX 3.4.0. Compatibility with other MINIX releases has not been established.
+
 A project-local compatibility layer that restores dynamic Citrus internationalization support on MINIX 3.
 
 The library enables applications to use MINIX's existing Citrus encoding modules for multibyte character conversion, locale handling, and `iconv()` without rebuilding libc or modifying system libraries.

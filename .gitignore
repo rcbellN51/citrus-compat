@@ -1,0 +1,35 @@
+# Compiled objects and libraries
+*.o
+*.a
+
+# Test executables
+/tests/integration-test
+/tests/integration-whole
+/tests/integration-static
+/tests/integration-objects
+/tests/error-test
+/tests/iconv-test
+/tests/ctype-test
+/tests/locale-test
+/tests/locale-switch-test
+/tests/stdenc-error-test
+/tests/stdenc-fault-test
+/tests/ctype-fault-test
+
+# Additional diagnostic executables
+/iconv-test
+/tests/ctype-layout-test
+/tests/ctype-object-test
+/tests/stdenc-default-test
+
+# Example executables
+/examples/utf8-demo
+
+# Editor and temporary files
+*~
+*.swp
+*.swo
+
+# Local source snapshots
+*.working
+*.integrated

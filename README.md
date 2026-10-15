@@ -252,3 +252,9 @@ The compatibility layer successfully supports the tested UTF-8 locale operations
 Automated integration and fault-injection tests pass.
 
 The implementation remains experimental and is intended primarily for MINIX 3 development, compatibility testing, and exploration of its existing internationalization infrastructure.
+
+## License
+
+This project is distributed under the MIT License. See [LICENSE](LICENSE) for details.
+
+Development history and provenance are documented in [DEVELOPMENT.md](DEVELOPMENT.md).

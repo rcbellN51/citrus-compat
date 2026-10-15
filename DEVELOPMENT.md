@@ -4,7 +4,7 @@
 
 ## Development process
 
-The project was developed through iterative AI-assisted collaboration with ChatGPT. Much of the compatibility implementation, test code, and documentation was generated or refined during this collaboration, with the resulting code 
+The project was developed through iterative AI-assisted collaboration with ChatGPT. Much of the compatibility implementation, test code, and documentation was generated or refined during this collaboration, with the resulting code
 compiled, tested, debugged, and validated on a MINIX 3 system.
 
 Development and testing were performed on MINIX 3.4.0 running in a QEMU/KVM virtual machine.

@@ -16,6 +16,9 @@ SRCS=           citrus-loader.c \
 
 OBJS=           ${SRCS:.c=.o}
 
+# Rebuild these objects when the debug header changes.
+citrus-loader.o citrus-ctype.o citrus-stdenc.o: citrus-debug.h
+
 TESTS=          tests/integration-test \
                 tests/integration-whole \
                 tests/error-test \

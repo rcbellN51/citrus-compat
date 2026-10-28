@@ -6,6 +6,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "citrus-debug.h"
+
 typedef struct _citrus_module_rec *_citrus_module_t;
 
 struct _citrus_ctype;
@@ -68,7 +70,7 @@ ctype_destroy(struct _citrus_ctype *cc, int initialized)
     if (cc == NULL || cc == &_citrus_ctype_default)
         return;
 
-    fprintf(stderr, "CTYPE: closing dynamic encoding\n");
+    CITRUS_LOG("CTYPE: closing dynamic encoding\n");
 
     if (cc->cc_ops != NULL) {
         if (initialized && cc->cc_ops->co_uninit != NULL)
@@ -86,7 +88,7 @@ ctype_destroy(struct _citrus_ctype *cc, int initialized)
 void
 _citrus_ctype_close(struct _citrus_ctype *cc)
 {
-    fprintf(stderr, "CTYPE: close called (%p)\n", (void *)cc);
+    CITRUS_LOG("CTYPE: close called (%p)\n", (void *)cc);
 
     ctype_destroy(cc, 1);
 }
@@ -118,7 +120,7 @@ _citrus_ctype_open(struct _citrus_ctype **rcc,
         return original(rcc, encname, variable, lenvar, szpriv);
     }
 
-    fprintf(stderr, "CTYPE: opening '%s'\n", encname);
+    CITRUS_LOG("CTYPE: opening '%s'\n", encname);
 
     cc = calloc(1, sizeof(*cc));
 
@@ -179,7 +181,7 @@ _citrus_ctype_open(struct _citrus_ctype **rcc,
     if (ret != 0)
         goto fail;
 
-    fprintf(stderr,
+    CITRUS_LOG(
         "CTYPE: '%s' initialized (private state=%lu)\n",
         encname, (unsigned long)szpriv);
 
@@ -188,7 +190,7 @@ _citrus_ctype_open(struct _citrus_ctype **rcc,
     return 0;
 
 fail:
-    fprintf(stderr,
+    CITRUS_LOG(
         "CTYPE: '%s' initialization failed: %d\n",
         encname, ret);
 

@@ -116,6 +116,34 @@ make check
 
 The compatibility library is built locally. No installation into system library directories is required.
 
+## Debug logging
+
+Diagnostic logging is disabled by default. Normal builds do not emit messages from the Citrus module loader, CTYPE, or STDENC compatibility interfaces.
+
+To enable diagnostic logging during development or troubleshooting:
+
+```sh
+make clean
+make CFLAGS="-O2 -Wall -Wextra -DCITRUS_DEBUG"
+```
+
+To build and run the regression tests with diagnostic logging enabled:
+
+```sh
+make check CFLAGS="-O2 -Wall -Wextra -DCITRUS_DEBUG"
+```
+
+Debug messages are written to standard error and report module loading, symbol resolution, initialization, failures, and cleanup.
+
+To restore the normal build:
+
+```sh
+make clean
+make
+```
+
+The `CITRUS_DEBUG` option controls diagnostic output only. It does not change the compatibility layer's error-return behavior.
+
 ## Linking applications
 
 MINIX libc already defines the Citrus entry points that `citrus-compat` replaces.

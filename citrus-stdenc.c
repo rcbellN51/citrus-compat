@@ -6,6 +6,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "citrus-debug.h"
+
 typedef struct _citrus_module_rec *_citrus_module_t;
 
 struct _citrus_stdenc;
@@ -68,7 +70,7 @@ stdenc_destroy(struct _citrus_stdenc *ce, int initialized)
     if (ce == NULL || ce == &_citrus_stdenc_default)
         return;
 
-    fprintf(stderr, "STDENC: closing dynamic encoding\n");
+    CITRUS_LOG("STDENC: closing dynamic encoding\n");
 
     if (ce->ce_ops != NULL) {
         if (initialized && ce->ce_ops->eo_uninit != NULL)
@@ -88,7 +90,7 @@ stdenc_destroy(struct _citrus_stdenc *ce, int initialized)
 void
 _citrus_stdenc_close(struct _citrus_stdenc *ce)
 {
-    fprintf(stderr, "STDENC: close called (%p)\n", (void *)ce);
+    CITRUS_LOG("STDENC: close called (%p)\n", (void *)ce);
 
     stdenc_destroy(ce, 1);
 }
@@ -119,7 +121,7 @@ _citrus_stdenc_open(struct _citrus_stdenc **rce,
         return original(rce, encname, variable, lenvar);
     }
 
-    fprintf(stderr, "STDENC: opening '%s'\n", encname);
+    CITRUS_LOG("STDENC: opening '%s'\n", encname);
 
     ce = calloc(1, sizeof(*ce));
 
@@ -177,7 +179,7 @@ _citrus_stdenc_open(struct _citrus_stdenc **rce,
     if (ret != 0)
         goto fail;
 
-    fprintf(stderr,
+    CITRUS_LOG(
         "STDENC: '%s' initialized (state=%lu, max=%lu)\n",
         encname,
         (unsigned long)ce->ce_traits->et_state_size,
@@ -188,7 +190,7 @@ _citrus_stdenc_open(struct _citrus_stdenc **rce,
     return 0;
 
 fail:
-    fprintf(stderr,
+    CITRUS_LOG(
         "STDENC: '%s' initialization failed: %d\n",
         encname, ret);
 

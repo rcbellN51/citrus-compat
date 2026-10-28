@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "citrus-debug.h"
+
 typedef struct _citrus_module_rec *_citrus_module_t;
 
 #define CITRUS_MODULE_DIR "/usr/lib/i18n"
@@ -42,16 +44,16 @@ _citrus_load_module(_citrus_module_t *rhandle, const char *name)
     if (length < 0 || (size_t)length >= sizeof(path))
         return EINVAL;
 
-    fprintf(stderr, "CITRUS: loading %s\n", path);
+    CITRUS_LOG("CITRUS: loading %s\n", path);
 
     handle = dlopen(path, RTLD_LAZY);
 
     if (handle == NULL) {
-        fprintf(stderr, "CITRUS: dlopen failed: %s\n", dlerror());
+        CITRUS_LOG("CITRUS: dlopen failed: %s\n", dlerror());
         return EINVAL;
     }
 
-    fprintf(stderr, "CITRUS: module loaded successfully\n");
+    CITRUS_LOG("CITRUS: module loaded successfully\n");
 
     *rhandle = (_citrus_module_t)handle;
 
@@ -75,15 +77,15 @@ _citrus_find_getops(_citrus_module_t handle,
     if (length < 0 || (size_t)length >= sizeof(symbol))
         return NULL;
 
-    fprintf(stderr, "CITRUS: resolving %s\n", symbol);
+    CITRUS_LOG("CITRUS: resolving %s\n", symbol);
 
     dlerror();
     getops = dlsym((void *)handle, symbol);
 
     if (getops == NULL) {
-        fprintf(stderr, "CITRUS: dlsym failed: %s\n", dlerror());
+        CITRUS_LOG("CITRUS: dlsym failed: %s\n", dlerror());
     } else {
-        fprintf(stderr, "CITRUS: symbol resolved successfully\n");
+        CITRUS_LOG("CITRUS: symbol resolved successfully\n");
     }
 
     return getops;
@@ -93,7 +95,7 @@ void
 _citrus_unload_module(_citrus_module_t handle)
 {
     if (handle != NULL) {
-        fprintf(stderr, "CITRUS: unloading module\n");
+        CITRUS_LOG("CITRUS: unloading module\n");
         dlclose((void *)handle);
     }
 }
